@@ -1,0 +1,53 @@
+{
+  // Default options
+  'functions': true,
+  'variableNameTransforms': ['dasherize']
+}
+
+{{#items}}
+${{spritesheet.strings.name}}-{{strings.name_name}}: '{{spritesheet.strings.name}}-{{name}}';
+${{spritesheet.strings.name}}-{{strings.name_offset_x}}: {{px.offset_x}};
+${{spritesheet.strings.name}}-{{strings.name_offset_y}}: {{px.offset_y}};
+${{spritesheet.strings.name}}-{{strings.name_width}}: {{px.width}};
+${{spritesheet.strings.name}}-{{strings.name_height}}: {{px.height}};
+${{spritesheet.strings.name}}-{{strings.name}}: {{px.x}} {{px.y}} {{px.offset_x}} {{px.offset_y}} {{px.width}} {{px.height}} {{px.total_width}} {{px.total_height}} '{{{escaped_image}}}' '{{spritesheet.strings.name}}-{{name}}';
+{{/items}}
+
+${{spritesheet.strings.name_width}}: {{spritesheet.px.width}};
+${{spritesheet.strings.name_height}}: {{spritesheet.px.height}};
+${{spritesheet.strings.name_image}}: '{{{spritesheet.escaped_image}}}';
+${{spritesheet.strings.name_sprites}}:{{#items}} ${{spritesheet.strings.name}}-{{name}}{{/items}};
+${{spritesheet.strings.name}}: {{spritesheet.px.width}} {{spritesheet.px.height}} '{{{spritesheet.escaped_image}}}' ${{spritesheet.strings.name_sprites}};
+
+{{#options.functions}}
+%{{spritesheet.strings.name}}-base-placeholder {
+  display: inline-block;
+  background: url('{{{spritesheet.escaped_image}}}') no-repeat;
+  vertical-align: middle;
+}
+
+@mixin {{spritesheet.strings.name}}-dimensions($sprite) {
+  width: nth($sprite, 5);
+  height: nth($sprite, 6);
+}
+
+@mixin {{spritesheet.strings.name}}-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin {{spritesheet.strings.name}}-image($sprite) {
+  @extend %{{spritesheet.strings.name}}-base-placeholder;
+  $sprite-image: nth($sprite, 9);
+}
+
+@mixin {{spritesheet.strings.name}}($sprite) {
+  @include {{spritesheet.strings.name}}-image($sprite);
+  @include {{spritesheet.strings.name}}-position($sprite);
+  @include {{spritesheet.strings.name}}-dimensions($sprite);
+}
+{{#items}}
+.{{spritesheet.strings.name}}-{{name}} { @extend %{{spritesheet.strings.name}}-base-placeholder; background-position: {{px.offset_x}} {{px.offset_y}}; width: {{px.width}}; height: {{px.height}}; }
+{{/items}}
+{{/options.functions}}

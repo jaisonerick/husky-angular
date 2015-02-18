@@ -1,0 +1,41 @@
+$sprites-logo-name: 'sprites-logo';
+$sprites-logo-offset-x: 0px;
+$sprites-logo-offset-y: 0px;
+$sprites-logo-width: 32px;
+$sprites-logo-height: 32px;
+$sprites-logo: 0px 0px 0px 0px 32px 32px 32px 32px 'images/sprites-generated.png' 'sprites-logo';
+
+$sprites-width: 32px;
+$sprites-height: 32px;
+$sprites-image: 'images/sprites-generated.png';
+$sprites-sprites: $sprites-logo;
+$sprites: 32px 32px 'images/sprites-generated.png' $sprites-sprites;
+
+%sprites-base-placeholder {
+  display: inline-block;
+  background: url('images/sprites-generated.png') no-repeat;
+  vertical-align: middle;
+}
+
+@mixin sprites-dimensions($sprite) {
+  width: nth($sprite, 5);
+  height: nth($sprite, 6);
+}
+
+@mixin sprites-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprites-image($sprite) {
+  @extend %sprites-base-placeholder;
+  $sprite-image: nth($sprite, 9);
+}
+
+@mixin sprites($sprite) {
+  @include sprites-image($sprite);
+  @include sprites-position($sprite);
+  @include sprites-dimensions($sprite);
+}
+.sprites-logo { @extend %sprites-base-placeholder; background-position: 0px 0px; width: 32px; height: 32px; }
