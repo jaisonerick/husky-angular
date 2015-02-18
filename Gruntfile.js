@@ -200,7 +200,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: '<%= config.dist %>',
-          src: '*.html',
+          src: ['*.html', 'views/{,*/}*.html'],
           dest: '<%= config.dist %>'
         }]
       }
@@ -216,6 +216,7 @@ module.exports = function(grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             'images/**/*.webp',
+            'js/{,*/}views/**/*.html',
             '*.html',
             'css/fonts/**/*'
           ]
@@ -240,6 +241,16 @@ module.exports = function(grunt) {
         cwd: 'bower_components/fontawesome/fonts',
         src: '**/*',
         dest: '.tmp/css/fonts/'
+      }
+    },
+    ngAnnotate: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '.tmp/concat/js',
+          src: [ '*.js' ],
+          dest: '.tmp/concat/js'
+        }]
       }
     },
     jshint: {
@@ -298,6 +309,7 @@ module.exports = function(grunt) {
     'concurrent:dist',
     'autoprefixer',
     'concat',
+    'ngAnnotate',
     'cssmin',
     'uglify',
     'copy:dist',
