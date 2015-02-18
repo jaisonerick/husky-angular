@@ -148,7 +148,7 @@ module.exports = function(grunt) {
         files: {
           src: [
             '/js/**/*.js',
-            '/css/**/*',
+            '/css/**/*.css',
             '/images/**/*.*',
             '/*.{ico,png}'
           ].map(prependFilepathWithDist)
