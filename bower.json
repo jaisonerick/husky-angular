@@ -2,9 +2,13 @@
   "name": "husky",
   "private": true,
   "version": "0.0.1",
-  "authors": [ "Jaison Erick <jaisonreis@gmail.com>" ],
+  "authors": [
+    "Jaison Erick <jaisonreis@gmail.com>"
+  ],
   "description": "Another Frontend Boilerplate built on top of Bourbon and libsass",
-  "moduleType": [ "globals" ],
+  "moduleType": [
+    "globals"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/jaisonerick/husky.git"
