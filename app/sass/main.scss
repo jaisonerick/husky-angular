@@ -1,5 +1,8 @@
 @import 'bourbon';
 @import 'neat';
 
+$fa-font-path: 'fonts';
+@import 'font-awesome';
+
 @import "utils/sprites";
 

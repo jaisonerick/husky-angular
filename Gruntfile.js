@@ -93,7 +93,8 @@ module.exports = function(grunt) {
         sourceMap: true,
         includePaths: [
           'bower_components/bourbon/dist/',
-          'bower_components/neat/app/assets/stylesheets/'
+          'bower_components/neat/app/assets/stylesheets/',
+          'bower_components/fontawesome/scss/'
         ],
         imagePath: '/images'
       },
@@ -218,6 +219,12 @@ module.exports = function(grunt) {
             '*.html',
             'css/fonts/**/*'
           ]
+        }, {
+          expand: true,
+          dot: true,
+          cwd: 'bower_components/fontawesome/fonts',
+          src: '**/*',
+          dest: '<%= config.dist %>/css/fonts/'
         }]
       },
       styles: {
@@ -226,6 +233,13 @@ module.exports = function(grunt) {
         cwd: '<%= config.app %>/css',
         dest: '.tmp/css/',
         src: '*.css'
+      },
+      fontawesome: {
+        expand: true,
+        dot: true,
+        cwd: 'bower_components/fontawesome/fonts',
+        src: '**/*',
+        dest: '.tmp/css/fonts/'
       }
     },
     jshint: {
@@ -271,6 +285,7 @@ module.exports = function(grunt) {
     'sprite',
     'jshint',
     'concurrent:server',
+    'newer:copy:fontawesome',
     'autoprefixer',
     'browserSync:dev',
     'watch'
