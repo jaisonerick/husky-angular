@@ -1,0 +1,12 @@
+$svg-hearth-width: 16.999px;
+$svg-hearth-height: 16px;
+
+%svg-hearth {
+  width: $svg-hearth-width;
+  height: $svg-hearth-height;
+}
+
+.svg-hearth-em {
+  width: em($svg-hearth-width);
+  height: em($svg-hearth-height);
+}

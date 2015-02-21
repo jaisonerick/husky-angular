@@ -1,5 +1,8 @@
+
+@import  '_settings.scss';
 @import 'bourbon';
 @import 'neat';
+@import "typography";
 
 $fa-font-path: 'fonts';
 @import 'font-awesome';
