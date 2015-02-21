@@ -1,11 +1,17 @@
+// Main SCSS
 
-@import  '_settings.scss';
 @import 'bourbon';
 @import 'neat';
-@import "typography";
 
-$fa-font-path: 'fonts';
-@import 'font-awesome';
+@import 'settings';
 
-@import "utils/sprites";
+@import "spriting/png-sprites";
+@import "spriting/svg-sprites";
+
+@import 'base';
+@import 'layout';
+@import 'modules';
+
+
+
 

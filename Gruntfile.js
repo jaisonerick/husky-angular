@@ -133,9 +133,9 @@ module.exports = function(grunt) {
         src: 'app/images/sprites/*.png',
         imgPath: 'images/sprites-generated.png',
         dest: 'app/images/sprites-generated.png',
-        cssTemplate: 'app/sass/utils/_sprites.template.mustache',
+        cssTemplate: 'app/sass/spriting/_png-sprites.scss.mustache',
         cssSpritesheetName: 'sprites',
-        destCss: 'app/sass/utils/_sprites.scss'
+        destCss: 'app/sass/spriting/_png-sprites.scss'
       }
     },
     'svg_sprite': {
@@ -154,8 +154,8 @@ module.exports = function(grunt) {
               dimensions: '%s',
               render: {
                 scss: {
-                  template: 'app/sass/utils/_svg-sprites.scss.mustache',
-                  dest: 'sass/_svg-sprites.scss'
+                  template: 'app/sass/spriting/_svg-sprites.scss.mustache',
+                  dest: 'sass/spriting/_svg-sprites.scss'
                 }
               }
             }
