@@ -163,6 +163,16 @@ module.exports = function(grunt) {
         }
       }
     },
+    kss: {
+      options: {
+        template: 'styleguide-template'
+      },
+      app: {
+        files: {
+          'build/styleguide': [ 'app/sass' ]
+        }
+      }
+    },
     autoprefixer: {
       options: {
         browsers: ['last 1 version']
@@ -327,6 +337,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'useminPrepare',
+    'kss',
     'sprite',
     'svg_sprite',
     'concurrent:dist',

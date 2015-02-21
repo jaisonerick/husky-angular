@@ -1,33 +1,100 @@
+// Settings
+//
+// *_settings.scss*
+//
+// Use this file to customize your style
+//
+// Styleguide 1.
+
+
+// Base Colors
+//
+// Base variables to use in conjunction with other elements. They provide a useful way to rebrand a
+// whole layout.
+//
+// ```scss
+// $blue                   // Blue color
+// $dark-gray              // Dark gray color
+// $medium-gray            // Medium gray color
+// $light-gray             // Light gray color
+// $base-background-color  // Default background color (used for inputs, background, etc.)
+// $base-font-color        // Default font color
+// $action-color           // Default action color (used for links, hovers, highlights, etc.)
+// ```
+//
+// Styleguide 1.1
 $blue: #477dca;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #ddd;
-
 $base-background-color: #fff;
 $base-font-color: $dark-gray;
 $action-color: $blue;
 
+// Typography
+//
+// Set the defaults for your texts, including line heights, font-family, size, weight, etc.
+//
+// ```scss
+// $base-font-family       // Font family that will be used around your layout
+// $heading-font-family    // Font used for heading. Default is the same as $base-font-family
+// $base-font-size         // Default font-size. You'll want to use em. Default is 1em
+// $base-line-height       // Default: 1.5. Try not to use unities here.
+// $heading-line-height    // Line-height for heading. Default to 1.2
+// $base-spacing           // Used as reference to calc padding and margin. Default to base-line-height in em
+// $small-spacing          // Reference for small padding and margin. Default to half of $base-spacing
+// ```
+//
+// Styleguide 1.2
 $base-font-family: 'Open Sans', sans-serif;
 $heading-font-family: $base-font-family;
-
 $base-font-size: 1em;
 $base-line-height: 1.5;
 $heading-line-height: 1.2;
 $base-spacing: $base-line-height * 1em;
 $small-spacing: $base-spacing / 2;
 
+// Borders
+//
+// Stylize the lines of your layout
+//
+// ```scss
+// $base-border-color      // Default lines color
+// $base-border            // Default border
+// $base-border-radius     // Whenever there's a radius, this value will be used in calculation
+// ```
+//
+// Styleguide 1.3
 $base-border-color: $light-gray;
 $base-border: 1px solid $base-border-color;
-
 $base-border-radius: 3px;
-$base-z-index: 0;
 
+// Forms
+//
+// Setup the base style of your forms
+//
+// ```scss
+// $form-box-shadow        // The shadow used in input, selects and textarea elements
+// $form-box-shadow-focus  // Shadow used when the element gain focus.
+// ```
+//
+// Styleguide 1.4
 $form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
 $form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
 
-// Neat Breakpoints
+// Media Query Breakpoints
+//
+// Tune your layout to various screen sizes.
+//
+// ```scss
+// $medium-screen          // Medium screen breakpoint (default to em:640)
+// $large-screen           // Large screen breakpoint (default to em:860)
+// $medium-screen-up       // Expression used on @include media to select medium screen up
+// $large-screen-up        // Expression used on @include media to select large screen up
+// ```
+//
+// Styleguide 1.5
 $medium-screen: em(640);
 $large-screen: em(860);
-
 $medium-screen-up: new-breakpoint(min-width $medium-screen 4);
 $large-screen-up: new-breakpoint(min-width $large-screen 8);
