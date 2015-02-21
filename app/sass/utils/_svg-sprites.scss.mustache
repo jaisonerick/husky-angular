@@ -1,0 +1,16 @@
+{{#shapes}}
+{{#selector.dimensions}}${{raw}}-width{{/selector.dimensions}}: {{width.inner}}px;
+{{#selector.dimensions}}${{raw}}-height{{/selector.dimensions}}: {{height.inner}}px;
+{{/shapes}}
+
+{{#shapes}}
+%{{#selector.dimensions}}{{raw}}{{/selector.dimensions}} {
+  width: {{#selector.dimensions}}${{raw}}-width{{/selector.dimensions}};
+  height: {{#selector.dimensions}}${{raw}}-height{{/selector.dimensions}};
+}
+
+.{{#selector.dimensions}}{{raw}}{{/selector.dimensions}}-em {
+  width: em({{#selector.dimensions}}${{raw}}-width{{/selector.dimensions}});
+  height: em({{#selector.dimensions}}${{raw}}-height{{/selector.dimensions}});
+}
+{{/shapes}}

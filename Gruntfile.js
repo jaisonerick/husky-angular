@@ -21,6 +21,13 @@ module.exports = function(grunt) {
           event: ['deleted', 'added', 'changed']
         }
       },
+      svgSprites: {
+        files: [ '<%= config.app %>/images/svg/*.svg' ],
+        tasks: [ 'svg_sprite' ],
+        options: {
+          event: ['deleted', 'added', 'changed']
+        }
+      },
       js: {
         files: [ '<%= config.app %>/js/**/*.js' ],
         tasks: [ 'jshint:app', 'karma:unit' ]
@@ -130,6 +137,31 @@ module.exports = function(grunt) {
         destCss: 'app/sass/utils/_sprites.scss'
       }
     },
+    'svg_sprite': {
+      sprites: {
+        expand: true,
+        cwd: 'app/images/svg',
+        src: [ '**/*.svg' ],
+        dest: 'app',
+
+        options: {
+          mode: {
+            symbol: {
+              dest: '.',
+              sprite: 'images/sprites-generated.svg',
+              prefix: 'svg-%s',
+              dimensions: '%s',
+              render: {
+                scss: {
+                  template: 'app/sass/utils/_svg-sprites.scss.mustache',
+                  dest: 'sass/_svg-sprites.scss'
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     autoprefixer: {
       options: {
         browsers: ['last 1 version']
@@ -164,7 +196,12 @@ module.exports = function(grunt) {
     },
     usemin: {
       options: {
-        assetsDirs: ['/', '/images'].map(prependFilepathWithDist)
+        assetsDirs: ['/', '/images'].map(prependFilepathWithDist),
+        patterns: {
+          html: [
+            [/(images\/sprites-generated\.svg)/, 'Replacing sprites generated SVG']
+          ]
+        }
       },
       html: ['/*.html'].map(prependFilepathWithDist),
       css: ['/css/*.css'].map(prependFilepathWithDist)
@@ -174,17 +211,10 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: '<%= config.app %>/images',
-          src: '{,*/}*.{gif,jpeg,jpg,png}',
-          dest: '<%= config.dist %>/images'
-        }]
-      }
-    },
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= config.app %>/images',
-          src: '{,*/}*.svg',
+          src: [
+            '**/*.{gif,jpeg,jpg,png}',
+            '!sprites/**/*'
+          ],
           dest: '<%= config.dist %>/images'
         }]
       }
@@ -216,6 +246,7 @@ module.exports = function(grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             'images/**/*.webp',
+            'images/*.svg',
             '*.html',
             'css/fonts/**/*'
           ]
@@ -276,13 +307,14 @@ module.exports = function(grunt) {
         limit: 5
       },
       server: [ 'sass:server', 'copy:styles' ],
-      dist: [ 'sass:dist', 'copy:styles', 'imagemin', 'svgmin' ]
+      dist: [ 'sass:dist', 'copy:styles', 'imagemin' ]
     }
   });
 
   grunt.registerTask('serve', [
     'clean:server',
     'sprite',
+    'svg_sprite',
     'jshint',
     'concurrent:server',
     'newer:copy:fontawesome',
@@ -295,6 +327,7 @@ module.exports = function(grunt) {
     'clean:dist',
     'useminPrepare',
     'sprite',
+    'svg_sprite',
     'concurrent:dist',
     'autoprefixer',
     'concat',
