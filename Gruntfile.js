@@ -101,6 +101,7 @@ module.exports = function(grunt) {
         includePaths: [
           'bower_components/bourbon/dist/',
           'bower_components/neat/app/assets/stylesheets/',
+          'bower_components/bitters/app/assets/stylesheets/',
           'bower_components/fontawesome/scss/'
         ],
         imagePath: '/images'
