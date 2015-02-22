@@ -1,0 +1,107 @@
+// Sandwich
+//
+// Display a sandwich button with an animation changing it into an X button
+//
+// Markup:
+// <div class="sandwich {{modifier_class}}">
+//   <div class="sandwich__elements">&nbsp;</div>
+// </div>
+//
+// :hover           - Transform the Sandwich into a close button
+// .sandwich--close - Render the button with the close state active
+//
+// Styleguide modules.sandwich
+
+$sandwich-color: #000 !default;
+$sandwich-use-border: false !default;
+$sandwich-size: 50px 44px !default;
+$sandwich-background-dark: #000 !default;
+$sandwich-background-light: #fff !default;
+
+$sandwich-padding: 12px 15px !default;
+
+$sandwich-background: transparent !default;
+@if $sandwich-use-border == true {
+  $sandwich-background: select-color(contrast-color($sandwich-color, $sandwich-background-dark, $sandwich-background-light), $sandwich-background-dark, $sandwich-background-light);
+}
+$sandwich-width: nth($sandwich-size, 1) !default;
+$sandwich-height: $sandwich-width !default;
+
+@if length($sandwich-size) > 1 {
+  $sandwich-height: nth($sandwich-size, 2);
+}
+
+$sandwich-padding-unpack: unpack($sandwich-padding);
+$sandwich-padding-top: nth($sandwich-padding-unpack, 1);
+$sandwich-padding-right: nth($sandwich-padding-unpack, 2);
+$sandwich-padding-bottom: nth($sandwich-padding-unpack, 3);
+$sandwich-padding-left: nth($sandwich-padding-unpack, 4);
+
+$sandwich-inner-height: $sandwich-height - $sandwich-padding-top - $sandwich-padding-bottom;
+$sandwich-inner-width: $sandwich-width - $sandwich-padding-left - $sandwich-padding-right;
+
+$sandwich-dash-height: $sandwich-inner-height * 3 / 19;
+$sandwich-dash-space: $sandwich-dash-height * 5 / 3;
+
+$sandwich-dash-height: floor($sandwich-dash-height);
+$sandwich-dash-space: floor($sandwich-dash-space);
+
+.sandwich {
+  @include size($sandwich-size);
+  position: relative;
+  cursor: pointer;
+  background: transparent;
+
+  @if $sandwich-use-border == true {
+    border: 1px solid $sandwich-color;
+    transition: background-color .4s ease-in-out;
+    &:hover {
+      background: transparentize($sandwich-background, .7);
+    }
+  }
+
+  &__elements {
+    top: $sandwich-height / 2 - $sandwich-dash-height / 2;
+    left: $sandwich-padding-left;
+
+    transition: all .5s $ease-out-expo;
+
+    &, &::before, &::after {
+      position: absolute;
+      width: $sandwich-inner-width;
+      height: $sandwich-dash-height;
+      background: $sandwich-color;
+    }
+
+    &::before, &::after {
+      top: 0;
+      display: block;
+      content: '';
+      transition: all .5s $ease-out-quad;
+    }
+
+    &::before {
+      margin-top: - $sandwich-dash-space - $sandwich-dash-height;
+    }
+
+    &::after {
+      margin-top: $sandwich-dash-space + $sandwich-dash-height;
+    }
+  }
+
+  &--close, &:hover {
+    .sandwich__elements {
+      background: transparent;
+
+      &::before {
+        margin-top: 0;
+        @include transform(rotate(-45deg));
+      }
+
+      &::after {
+        margin-top: 0;
+        @include transform(rotate(45deg));
+      }
+    }
+  }
+}
