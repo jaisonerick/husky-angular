@@ -6,6 +6,11 @@ Another Frontend Boilerplate
 
 Husky is not ready yet.
 
+## Validate Rich Snippets
+
+Google+ Tags: http://www.google.com/webmasters/tools/richsnippets
+Open Graph: https://developers.facebook.com/tools/debug
+
 # License
 Copyright (C) 2015 Jaison Erick
 
