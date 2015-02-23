@@ -175,7 +175,7 @@ module.exports = function(grunt) {
     },
     autoprefixer: {
       options: {
-        browsers: ['last 1 version']
+        browsers: ['last 2 version']
       },
       dist: {
         files: [{
@@ -277,6 +277,21 @@ module.exports = function(grunt) {
         dest: '.tmp/css/',
         src: '*.css'
       },
+      styleguide: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '.tmp/css',
+          dest: '<%= config.dist %>/styleguide/build/css',
+          src: '*'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '<%= config.app %>/images',
+          dest: '<%= config.dist %>/styleguide/build/images',
+          src: '*'
+        }]
+      },
       fontawesome: {
         expand: true,
         dot: true,
@@ -348,7 +363,6 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'useminPrepare',
-    'kss',
     'sprite',
     'svg_sprite',
     'concurrent:dist',
@@ -360,7 +374,21 @@ module.exports = function(grunt) {
     'copy:dist',
     'rev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'copy:styleguide',
+    'kss'
+  ]);
+
+  grunt.registerTask('styleguide', [
+    'clean:dist',
+    'sprite',
+    'svg_sprite',
+    'sass:dist',
+    'autoprefixer',
+    'copy:styles',
+    'copy:dist',
+    'copy:styleguide',
+    'kss'
   ]);
 
   grunt.registerTask('default', [

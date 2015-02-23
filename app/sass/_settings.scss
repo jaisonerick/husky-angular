@@ -4,7 +4,7 @@
 //
 // Use this file to customize your style
 //
-// Styleguide 1.
+// Styleguide settings.
 
 
 // Base Colors
@@ -22,7 +22,7 @@
 // $action-color           // Default action color (used for links, hovers, highlights, etc.)
 // ```
 //
-// Styleguide 1.1
+// Styleguide settings.colors
 $blue: #477dca;
 $dark-gray: #333;
 $medium-gray: #999;
@@ -45,7 +45,7 @@ $action-color: $blue;
 // $small-spacing          // Reference for small padding and margin. Default to half of $base-spacing
 // ```
 //
-// Styleguide 1.2
+// Styleguide settings.typography
 $base-font-family: 'Open Sans', sans-serif;
 $heading-font-family: $base-font-family;
 $base-font-size: 1em;
@@ -64,7 +64,7 @@ $small-spacing: $base-spacing / 2;
 // $base-border-radius     // Whenever there's a radius, this value will be used in calculation
 // ```
 //
-// Styleguide 1.3
+// Styleguide settings.borders
 $base-border-color: $light-gray;
 $base-border: 1px solid $base-border-color;
 $base-border-radius: 3px;
@@ -93,7 +93,7 @@ $form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $l
 // $large-screen-up        // Expression used on @include media to select large screen up
 // ```
 //
-// Styleguide 1.5
+// Styleguide settings.mediaqueries
 $medium-screen: em(640);
 $large-screen: em(860);
 $medium-screen-up: new-breakpoint(min-width $medium-screen 4);

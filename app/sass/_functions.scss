@@ -1,0 +1,27 @@
+
+// From http://compass-style.org/reference/compass/utilities/color/brightness/
+@function brightness($color) {
+  @if type-of($color) == color {
+    @return (red($color) * 0.299 + green($color) * 0.587 + blue($color) * 0.114) / 255 * 100%;
+  }
+  @else {
+    @return unquote("brightness(#{$color})");
+  }
+}
+
+// From http://compass-style.org/reference/compass/utilities/color/contrast/
+@function contrast-color($color, $dark, $light, $threshold: null) {
+  @if $color == null {
+    @return null;
+  }
+  @else {
+    $color-brightness: brightness($color);
+    $dark-text-brightness: brightness($dark);
+    $light-text-brightness: brightness($light);
+    @return if(abs($color-brightness - $light-text-brightness) > abs($color-brightness - $dark-text-brightness), $light, $dark);
+  }
+}
+
+@function select-color($color, $option-a, $option-b) {
+  @return if($color == $option-a, $option-b, $option-a);
+}
