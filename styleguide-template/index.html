@@ -20,7 +20,23 @@
        <ul class="styleguide-menu-list" data-kss-ref="{{rootName}}">
         <li><a href="./">1. Overview</a></li>
         {{#eachRoot}}
-        <li><a href="section-{{referenceURI}}.html">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}. {{header}}</a></li>
+        <li>
+          <a href="section-{{referenceURI}}.html">{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}. {{header}}</a>
+
+          {{#ifReference ../rootName}}
+          <ul class="styleguide-menu-list">
+            {{#eachSection reference}}
+              {{#ifDepth 2}}
+              <li>
+                <a href="section-{{../../referenceURI}}.html#kssref-{{referenceURI}}">
+                  {{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}. {{header}}
+                </a>
+              </li>
+              {{/ifDepth}}
+            {{/eachSection}}
+          </ul>
+          {{/ifReference}}
+        </li>
         {{/eachRoot}}
       </ul>
     </nav>
@@ -34,9 +50,15 @@
       {{else}}
       {{#eachSection rootName}}
       {{#if markup}}
-      <div class="styleguide-example">
+      <div class="styleguide-example" id="kssref-{{referenceURI}}">
         <header class="styleguide-example-header styleguide-reset">
-          <h3>{{header}} <em>{{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}</em></h3>
+          <h3>{{header}} <em><a class="kss-title__permalink" href="#kssref-{{referenceURI}}">
+            {{#ifNumeric reference}}
+              {{reference}}
+            {{else}}
+              {{autoincrement}}
+            {{/ifNumeric}}
+          </a> <a href="#">(Back to top)</a></em></h3>
         </header>
         {{#if description}}
         <div class="styleguide-description styleguide-markdown-body styleguide-reset">
@@ -68,7 +90,7 @@
         </div>
       </div>
       {{else}}
-      <header class="example-header styleguide-reset">
+      <header class="example-header styleguide-reset" id="kssref-{{referenceURI}}">
         <h1>{{header}}</h1>
       </header>
       {{#if description}}
